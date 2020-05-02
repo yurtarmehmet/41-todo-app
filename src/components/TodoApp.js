@@ -9,10 +9,15 @@ class TodoApp extends React.Component{
     }
 
     render(){
+        // 0. showNotification ilk basta false
+        // 1. addTodo Dispatch edildi - todos guncellendi, bu component degil
+        // 2. showNotification Dispatch edildi
+        // 3. showNotification true oldu,
+        // 4. bu componenent notification degerlerine connect(bagli oldugu icin kendini gunceller)
         return (
             <div>
                 <TodoAppHeader/>
-                <TodoAppList />
+                <TodoAppList/>
                 {
                     this.props.showNotification && <h3>{this.props.notificationText}</h3>
                 }
