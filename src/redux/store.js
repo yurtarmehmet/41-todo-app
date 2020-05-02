@@ -1,8 +1,11 @@
-import {todoReducer} from "./reducers";
-import {combineReducers, createStore} from "redux";
+import {todoReducer, notificationsReducer} from "./reducers";
+import {combineReducers, createStore, applyMiddleware} from "redux";
+import logger from "redux-logger";
+import thunk from "redux-thunk";
 
 const reducers = combineReducers({
-    todoReducer: todoReducer
+    todoReducer: todoReducer,
+    notificationsReducer: notificationsReducer
 });
 
-export const store = createStore(reducers);
+export const store = createStore(reducers, applyMiddleware(thunk));
