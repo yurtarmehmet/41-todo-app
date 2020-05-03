@@ -7,7 +7,10 @@ class TodoAppAdd extends Component{
         super(props);
 
         this.state = {
-            value: ""
+            title: "",
+            description: "",
+            completed: false,
+            priority: "high"
         }
     }
 
@@ -19,19 +22,86 @@ class TodoAppAdd extends Component{
                     e.preventDefault();
                     // statete tuttugum inputu son degerini aliyorum
                     const newContent = this.state.value;
-                    this.props.addTodo(newContent);
+                    const newTodoObject = {
+                        title: this.state.title,
+                        description: this.state.description,
+                        completed: this.state.completed,
+                        priority: this.state.priority
+                    };
+                    this.props.addTodo(newTodoObject);
+                    this.setState({
+                        title: "",
+                        description: "",
+                        completed: false,
+                        priority: "high"
+                    });
                 }}>
-                    <input
-                        type="text"
-                        placeholder="Todo Giriniz"
-                        value={this.state.value}
-                        onChange={(e) => {
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            placeholder="Todo Title Giriniz"
+                            value={this.state.title}
+                            onChange={(e) => {
+                                this.setState({
+                                    title: e.target.value
+                                })
+                            }}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input type="text"
+                               placeholder="Todo Description Giriniz"
+                               value={this.state.description}
+                               onChange={(e) => {
+                                   this.setState({
+                                       description: e.target.value
+                                   })
+                               }}
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input type="radio"
+                               name="completed"
+                               id="completed-todo-field"
+                               value={this.state.completed}
+                               onChange={(e) => {
+                                   this.setState({
+                                       completed: e.target.value
+                                   })
+                               }}
+                        />
+                        <label htmlFor="completed-todo-field">Completed</label>
+                    </div>
+                    <div className="form-group">
+                        <input type="radio"
+                               name="completed"
+                               id="uncompleted-todo-field"
+                               value={this.state.completed}
+                               onChange={(e) => {
+                                   this.setState({
+                                       completed: e.target.value
+                                   })
+                               }}
+                        />
+                        <label htmlFor="uncompleted-todo-field">Not Completed</label>
+                    </div>
+
+                    <div className="form-group">
+                        <select value={this.state.priority} onChange={(e) => {
                             this.setState({
-                                value: e.target.value
+                                priority: e.target.value
                             })
-                        }}
-                    />
-                    <button type="submit">Todo Ekle</button>
+                        }}>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+
+
+                    <div className="form-group">
+                        <button type="submit">Todo Ekle</button>
+                    </div>
                 </form>
             </div>
         );

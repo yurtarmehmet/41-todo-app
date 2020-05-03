@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from "react-redux";
-import {toggleTodo} from "../redux/actions";
+import {removeTodo, toggleTodo} from "../redux/actions";
 import styled from "styled-components";
 
 const myColor = "rebeccapurple";
@@ -17,16 +17,25 @@ const StyledListItem = styled.div`
 `;
 
 
-const TodoAppListItem = ({content, id, completed, toggleTodo}) => {
+const TodoAppListItem = ({title, id, completed, description, priority, toggleTodo, removeTodo}) => {
     return (
         <StyledListItem textColor="yellow" completed={completed} onClick={() => toggleTodo(id)}>
-            {content}
+            <span>
+              {title}
+            </span>
+            <span>
+                <button onClick={(event) => {
+                    event.stopPropagation();
+                    removeTodo(id);
+                }}>Sil</button>
+            </span>
         </StyledListItem>
     );
 };
 
 const mapDispatchToProps = {
-    toggleTodo: toggleTodo
-}
+    toggleTodo: toggleTodo,
+    removeTodo: removeTodo
+};
 
 export default connect(null, mapDispatchToProps)(TodoAppListItem);

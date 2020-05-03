@@ -1,20 +1,21 @@
-import {ADD_TODO, TOGGLE_TODO, SHOW_NOTIFICATION, HIDE_NOTIFICATION} from "./types";
+import {ADD_TODO, TOGGLE_TODO, REMOVE_TODO, SHOW_NOTIFICATION, HIDE_NOTIFICATION} from "./types";
 
 
 export const todoReducer = (state= [], action)  => {
        switch (action.type) {
            case ADD_TODO:
-                return [...state, {
-                    id: Math.random(),
-                    completed: false,
-                    content: action.payload
-                }];
+                console.log(action);
+                return [...state, {id: Math.random(), ...action.payload}];
            case TOGGLE_TODO:
                return state.map((todo) => {
                    if(todo.id === action.payload){
                        return {...todo, completed: !todo.completed}
                    }
                    return todo;
+               });
+           case REMOVE_TODO:
+               return state.filter((todo) => {
+                  return todo.id !== action.payload;
                });
            default:
                return state;

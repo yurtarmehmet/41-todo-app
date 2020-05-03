@@ -3,6 +3,7 @@ import TodoAppListItem from "./TodoAppListItem";
 import {connect} from "react-redux";
 
 const TodoAppList = ({todos}) => {
+    console.log(todos);
     return (
         <div>
             {
