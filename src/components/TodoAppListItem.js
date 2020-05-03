@@ -20,9 +20,15 @@ const StyledListItem = styled.div`
 const TodoAppListItem = ({title, id, completed, description, priority, toggleTodo, removeTodo}) => {
     return (
         <StyledListItem textColor="yellow" completed={completed} onClick={() => toggleTodo(id)}>
-            <span>
+            <div>
               {title}
-            </span>
+            </div>
+            <div>
+                {description}
+            </div>
+            <div>
+                <strong>Priority</strong>: {priority}
+            </div>
             <span>
                 <button onClick={(event) => {
                     event.stopPropagation();
